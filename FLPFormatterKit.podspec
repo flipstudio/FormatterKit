@@ -5,7 +5,7 @@
   s.summary   = '`stringWithFormat:` for the sophisticated hacker set.'
   s.homepage  = 'https://github.com/mattt/FormatterKit'
   s.author    = { 'Mattt Thompson' => 'm@mattt.me' }
-  s.source    = { :git => 'git@github.com:flipstudio/FormatterKit.git', :tag => '1.2.2' }
+  s.source    = { :git => 'https://github.com/flipstudio/FormatterKit.git', :tag => '1.2.2' }
 
   s.description = "FormatterKit is a collection of well-crafted NSFormatter subclasses for things like units of information, distance, and relative time intervals. Each formatter abstracts away the complex business logic of their respective domain, so that you can focus on the more important aspects of your application."
 
