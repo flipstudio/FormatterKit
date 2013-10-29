@@ -43,6 +43,11 @@
     ss.resources = 'Localizations/**'
   end
 
+  s.subspec 'DayIntervalFormatter' do |ss|
+    ss.source_files = 'FormatterKit/TTTDayIntervalFormatter.{h,m}'
+    ss.resources = 'Localizations/**'
+  end
+
   s.subspec 'UnitOfInformationFormatter' do |ss|
     ss.source_files = 'FormatterKit/TTTUnitOfInformationFormatter.{h,m}'
     ss.resources = 'Localizations/**'
