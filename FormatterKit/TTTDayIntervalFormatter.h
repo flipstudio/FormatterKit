@@ -1,6 +1,5 @@
 //
 //  TTTDayIntervalFormatter.h
-//  Blooper
 //
 //  Created by Maurício Feijó on 10/28/13.
 //
@@ -10,7 +9,7 @@
 
 @interface TTTDayIntervalFormatter : NSFormatter
 
-- (NSString *)intervalBetweenStartingDate:(NSDate *)startDate endDate:(NSDate *)endDate;
-- (NSString *)intervalOfDates:(int)days endDate:(BOOL)endDate;
+- (NSString *)stringForTimeIntervalFromDate:(NSDate *)startingDate toDate:(NSDate *)endingDate;
+- (NSString *)stringForTimeInterval:(NSTimeInterval)seconds;
 
 @end
