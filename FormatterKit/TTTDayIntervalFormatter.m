@@ -21,16 +21,9 @@
 
 - (NSString *)stringForTimeInterval:(NSTimeInterval)seconds;
 {
-	NSString *interval;
-	
-	if (seconds > 86400 && seconds <= 172800)
-		return [NSString stringWithFormat:@"1 %@", NSLocalizedStringFromTable(@"day", @"FormatterKit", @"Day Unit (Singular, Abbreviated)")];
-	
 	int days = seconds/86400;
-	return [NSString stringWithFormat:@"%d %@", days - 1, NSLocalizedStringFromTable(@"days", @"FormatterKit", @"Day Unit (Plural, Abbreviated)")];
 	
-	return interval;
-
+	return [NSString stringWithFormat:@"%d %@", days, NSLocalizedStringFromTable((days == 1? @"day" : @"days"), @"FormatterKit", nil)];
 }
 
 @end
