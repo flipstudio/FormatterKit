@@ -16,14 +16,14 @@
 														fromDate:startingDate
 														  toDate:endingDate
 														 options:0];
-	return [self stringForTimeInterval:[components day]];
+	return [self stringForTimeInterval:[components day]*86400];
 }
 
 - (NSString *)stringForTimeInterval:(NSTimeInterval)seconds;
 {
 	NSString *interval;
 	
-	if (seconds == 172800)
+	if (seconds > 86400 && seconds <= 172800)
 		return [NSString stringWithFormat:@"1 %@", NSLocalizedStringFromTable(@"day", @"FormatterKit", @"Day Unit (Singular, Abbreviated)")];
 	
 	int days = seconds/86400;
