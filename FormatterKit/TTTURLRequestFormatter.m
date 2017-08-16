@@ -95,7 +95,7 @@
 @implementation TTTHTTPURLResponseFormatter
 
 - (NSString *)stringFromHTTPURLResponse:(NSHTTPURLResponse *)response {
-    return [NSString stringWithFormat:@"%d '%@'", [response statusCode], [[response URL] absoluteString]];
+    return [NSString stringWithFormat:@"%ld '%@'", (long)[response statusCode], [[response URL] absoluteString]];
 }
 
 @end

@@ -11,8 +11,8 @@
 
 - (NSString *)stringForTimeIntervalFromDate:(NSDate *)startingDate toDate:(NSDate *)endingDate
 {
-	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSDateComponents *components = [gregorianCalendar components:NSDayCalendarUnit
+	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	NSDateComponents *components = [gregorianCalendar components:NSCalendarUnitDay
 														fromDate:startingDate
 														  toDate:endingDate
 														 options:0];

@@ -24,22 +24,22 @@
 
 static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
     if ([string isEqualToString:@"year"]) {
-        return NSYearCalendarUnit;
+        return NSCalendarUnitYear;
     } else if ([string isEqualToString:@"month"]) {
-        return NSMonthCalendarUnit;
+        return NSCalendarUnitMonth;
     } else if ([string isEqualToString:@"week"]) {
-        return NSWeekCalendarUnit;
+        return NSCalendarUnitWeekOfMonth;
     } else if ([string isEqualToString:@"day"]) {
-        return NSDayCalendarUnit;
+        return NSCalendarUnitDay;
     } else if ([string isEqualToString:@"hour"]) {
-        return NSHourCalendarUnit;
+        return NSCalendarUnitHour;
     } else if ([string isEqualToString:@"minute"]) {
-        return NSMinuteCalendarUnit;
+        return NSCalendarUnitMinute;
     } else if ([string isEqualToString:@"second"]) {
-        return NSSecondCalendarUnit;
+        return NSCalendarUnitSecond;
     }
 
-    return NSUndefinedDateComponent;
+    return NSDateComponentUndefined;
 }
 
 @interface TTTTimeIntervalFormatter ()
@@ -81,7 +81,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
 
     self.presentTimeIntervalMargin = 1;
     
-    self.leastSignificantUnit = NSSecondCalendarUnit;
+    self.leastSignificantUnit = NSCalendarUnitSecond;
     self.numberOfSignificantUnits = 1;
 
     return self;
@@ -100,7 +100,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
         return self.presentDeicticExpression;
     }
 
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     NSDateComponents *components = [self.calendar components:unitFlags fromDate:startingDate toDate:endingDate options:0];
 
     if (self.usesIdiomaticDeicticExpressions) {
@@ -116,7 +116,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
     for (NSString *unitName in [NSArray arrayWithObjects:@"year", @"month", @"week", @"day", @"hour", @"minute", @"second", nil]) {
         NSCalendarUnit unit = NSCalendarUnitFromString(unitName);
         if (!string || self.leastSignificantUnit >= unit) {
-            NSNumber *number = [NSNumber numberWithInteger:abs([[components valueForKey:unitName] integerValue])];
+            NSNumber *number = [NSNumber numberWithInteger:labs([[components valueForKey:unitName] integerValue])];
             if ([number integerValue]) {
                 NSString *suffix = [NSString stringWithFormat:@"%@ %@", number, [self localizedStringForNumber:[number integerValue] ofCalendarUnit:unit]];
                 if (!string) {
@@ -156,38 +156,38 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
 
     if (self.usesAbbreviatedCalendarUnits) {
         switch (unit) {
-            case NSYearCalendarUnit:
+            case NSCalendarUnitYear:
                 return singular ? NSLocalizedStringFromTable(@"yr", @"FormatterKit", @"Year Unit (Singular, Abbreviated)") : NSLocalizedStringFromTable(@"yrs", @"FormatterKit", @"Year Unit (Plural, Abbreviated)");
-            case NSMonthCalendarUnit:
+            case NSCalendarUnitMonth:
                 return singular ? NSLocalizedStringFromTable(@"mo", @"FormatterKit", @"Month Unit (Singular, Abbreviated)") : NSLocalizedStringFromTable(@"mos", @"FormatterKit", @"Month Unit (Plural, Abbreviated)");
-            case NSWeekCalendarUnit:
+            case NSCalendarUnitWeekOfMonth:
                 return singular ? NSLocalizedStringFromTable(@"wk", @"FormatterKit", @"Week Unit (Singular, Abbreviated)") : NSLocalizedStringFromTable(@"wks", @"FormatterKit", @"Week Unit (Plural, Abbreviated)");
-            case NSDayCalendarUnit:
+            case NSCalendarUnitDay:
                 return singular ? NSLocalizedStringFromTable(@"day", @"FormatterKit", @"Day Unit (Singular, Abbreviated)") : NSLocalizedStringFromTable(@"days", @"FormatterKit", @"Day Unit (Plural, Abbreviated)");
-            case NSHourCalendarUnit:
+            case NSCalendarUnitHour:
                 return singular ? NSLocalizedStringFromTable(@"hr", @"FormatterKit", @"Hour Unit (Singular, Abbreviated)") : NSLocalizedStringFromTable(@"hrs", @"FormatterKit", @"Hour Unit (Plural, Abbreviated)");
-            case NSMinuteCalendarUnit:
+            case NSCalendarUnitMinute:
                 return singular ? NSLocalizedStringFromTable(@"min", @"FormatterKit", @"Minute Unit (Singular, Abbreviated)") : NSLocalizedStringFromTable(@"mins", @"FormatterKit", @"Minute Unit (Plural, Abbreviated)");
-            case NSSecondCalendarUnit:
+            case NSCalendarUnitSecond:
                 return singular ? NSLocalizedStringFromTable(@"s", @"FormatterKit", @"Second Unit (Singular, Abbreviated)") : NSLocalizedStringFromTable(@"s", @"FormatterKit", @"Second Unit (Plural, Abbreviated)");
             default:
                 return nil;
         }
     } else {
         switch (unit) {
-            case NSYearCalendarUnit:
+            case NSCalendarUnitYear:
                 return singular ? NSLocalizedStringFromTable(@"year", @"FormatterKit", @"Year Unit (Singular)") : NSLocalizedStringFromTable(@"years", @"FormatterKit", @"Year Unit (Plural)");
-            case NSMonthCalendarUnit:
+            case NSCalendarUnitMonth:
                 return singular ? NSLocalizedStringFromTable(@"month", @"FormatterKit", @"Month Unit (Singular)") : NSLocalizedStringFromTable(@"months", @"FormatterKit", @"Month Unit (Plural)");
-            case NSWeekCalendarUnit:
+            case NSCalendarUnitWeekOfMonth:
                 return singular ? NSLocalizedStringFromTable(@"week", @"FormatterKit", @"Week Unit (Singular)") : NSLocalizedStringFromTable(@"weeks", @"FormatterKit", @"Week Unit (Plural)");
-            case NSDayCalendarUnit:
+            case NSCalendarUnitDay:
                 return singular ? NSLocalizedStringFromTable(@"day", @"FormatterKit", @"Day Unit (Singular)") : NSLocalizedStringFromTable(@"days", @"FormatterKit", @"Day Unit (Plural)");
-            case NSHourCalendarUnit:
+            case NSCalendarUnitHour:
                 return singular ? NSLocalizedStringFromTable(@"hour", @"FormatterKit", @"Hour Unit (Singular)") : NSLocalizedStringFromTable(@"hours", @"FormatterKit", @"Hour Unit (Plural)");
-            case NSMinuteCalendarUnit:
+            case NSCalendarUnitMinute:
                 return singular ? NSLocalizedStringFromTable(@"minute", @"FormatterKit", @"Minute Unit (Singular)") : NSLocalizedStringFromTable(@"minutes", @"FormatterKit", @"Minute Unit (Plural)");
-            case NSSecondCalendarUnit:
+            case NSCalendarUnitSecond:
                 return singular ? NSLocalizedStringFromTable(@"second", @"FormatterKit", @"Second Unit (Singular)") : NSLocalizedStringFromTable(@"seconds", @"FormatterKit", @"Second Unit (Plural)");
             default:
                 return nil;
@@ -213,9 +213,9 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
         return @"last year";
     } else if ([components month] == -1 && [components year] == 0) {
         return @"last month";
-    } else if ([components week] == -1 && [components year] == 0 && [components month] == 0) {
+    } else if ([components weekOfMonth] == -1 && [components year] == 0 && [components month] == 0) {
         return @"last week";
-    } else if ([components day] == -1 && [components year] == 0 && [components month] == 0 && [components week] == 0) {
+    } else if ([components day] == -1 && [components year] == 0 && [components month] == 0 && [components weekOfMonth] == 0) {
         return @"yesterday";
     }
 
@@ -223,9 +223,9 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
         return @"next year";
     } else if ([components month] == 1 && [components year] == 0) {
         return @"next month";
-    } else if ([components week] == 1 && [components year] == 0 && [components month] == 0) {
+    } else if ([components weekOfMonth] == 1 && [components year] == 0 && [components month] == 0) {
         return @"next week";
-    } else if ([components day] == 1 && [components year] == 0 && [components month] == 0 && [components week] == 0) {
+    } else if ([components day] == 1 && [components year] == 0 && [components month] == 0 && [components weekOfMonth] == 0) {
         return @"tomorrow";
     }
 
@@ -237,11 +237,11 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
         return @"vorig jaar";
     } else if ([components month] == -1 && [components year] == 0) {
         return @"vorige maand";
-    } else if ([components week] == -1 && [components year] == 0 && [components month] == 0) {
+    } else if ([components weekOfMonth] == -1 && [components year] == 0 && [components month] == 0) {
         return @"vorige week";
-    } else if ([components day] == -1 && [components year] == 0 && [components month] == 0 && [components week] == 0) {
+    } else if ([components day] == -1 && [components year] == 0 && [components month] == 0 && [components weekOfMonth] == 0) {
         return @"gisteren";
-    } else if ([components day] == -2 && [components year] == 0 && [components month] == 0 && [components week] == 0) {
+    } else if ([components day] == -2 && [components year] == 0 && [components month] == 0 && [components weekOfMonth] == 0) {
         return @"eergisteren";
     }
     
@@ -249,11 +249,11 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
         return @"volgend jaar";
     } else if ([components month] == 1 && [components year] == 0) {
         return @"volgende maand";
-    } else if ([components week] == 1 && [components year] == 0 && [components month] == 0) {
+    } else if ([components weekOfMonth] == 1 && [components year] == 0 && [components month] == 0) {
         return @"volgende week";
-    } else if ([components day] == 1 && [components year] == 0 && [components month] == 0 && [components week] == 0) {
+    } else if ([components day] == 1 && [components year] == 0 && [components month] == 0 && [components weekOfMonth] == 0) {
         return @"morgern";
-    } else if ([components day] == 2 && [components year] == 0 && [components month] == 0 && [components week] == 0) {
+    } else if ([components day] == 2 && [components year] == 0 && [components month] == 0 && [components weekOfMonth] == 0) {
         return @"overmorgern";
     }
     

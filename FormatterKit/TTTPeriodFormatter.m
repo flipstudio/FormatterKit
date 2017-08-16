@@ -8,7 +8,7 @@
 
 #import "TTTPeriodFormatter.h"
 
-#define NSCalendarAllComponents		NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit
+#define NSCalendarAllComponents		NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond
 
 @implementation TTTPeriodFormatter
 
@@ -35,12 +35,12 @@
 			
 			[dateFormatter setDateFormat:@"MMMM"];
 			
-			return [NSString stringWithFormat:@"%d a %d de %@ de %d", [startComponents day], [endComponents day], [dateFormatter stringFromDate:end], [startComponents year]];
+			return [NSString stringWithFormat:@"%ld a %ld de %@ de %ld", (long)[startComponents day], (long)[endComponents day], [dateFormatter stringFromDate:end], (long)[startComponents year]];
 		}
 		
 		[dateFormatter setDateFormat:@"dd MMM"];
 		
-		return [NSString stringWithFormat:@"%@ a %@ de %d", [dateFormatter stringFromDate:start], [dateFormatter stringFromDate:end], [startComponents year]];
+		return [NSString stringWithFormat:@"%@ a %@ de %ld", [dateFormatter stringFromDate:start], [dateFormatter stringFromDate:end], [startComponents year]];
 	}
 	
 	[dateFormatter setDateFormat:@"dd/MM/yyyy"];
