@@ -1,6 +1,6 @@
  Pod::Spec.new do |s|
   s.name      = 'FLPFormatterKit'
-  s.version   = '1.2.2.2'
+  s.version   = '1.2.2.3'
   s.license   = { :type => 'MIT', :file => 'LICENSE' }
   s.summary   = '`stringWithFormat:` for the sophisticated hacker set.'
   s.homepage  = 'https://github.com/mattt/FormatterKit'
